@@ -11,7 +11,7 @@ class DocumentsController {
 
 		newDoc.save()
 			.then((saved) => {
-				this.events.emit('document.created', { document: saved.id });
+				this.events.emit('document.created', { document: saved });
 				res.status(status.CREATED).send(saved);
 			})
 			.catch(next);

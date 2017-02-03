@@ -4,10 +4,10 @@ mongoose.Promise = Promise;
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
-	document: {
-		type: Schema.Types.ObjectId,
-		ref: 'Document'
+	srcId: {
+		type: Schema.Types.ObjectId
 	},
+	type: { type: String, required: true, enum: ['document'] },
 	status: { type: String, required: true, enum: ['processed', 'processing', 'inQueue'], default: 'inQueue' }
 }, { timestamps: true });
 

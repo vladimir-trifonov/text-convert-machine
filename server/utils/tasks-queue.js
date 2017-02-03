@@ -1,3 +1,4 @@
+/* global Promise */
 const STATE = {
 	IDLE: 'idle',
 	BUSY: 'busy'
@@ -7,11 +8,12 @@ const tasksHandlers = require('./tasksHandlers');
 
 class TasksQueue {
 	constructor({events, options}) {
-		if(!tasksHandlers[options.type]) {
+		if (!tasksHandlers[options.type]) {
 			throw Error(`Missing task handler: ${options.type}`);
 		}
 
 		this.state = STATE.STOPPED;
+		this.taskHandler = tasksHandlers[options.type];
 		this.events = events;
 		this.options = options;
 		this.initEventHandlers();
@@ -31,23 +33,33 @@ class TasksQueue {
 	}
 
 	proceedTask() {
-
+		this.taskHandler.getNext()
+			.then(this.process.bind(this))
+			.then(this.proceedTask.bind(this))
+			.catch(() => {
+				this.state = STATE.IDLE;
+			});
 	}
 
-	getNext() {
+	process({task}) {
+		return new Promise((resolve, reject) => {
+			this.notifyProcessing(task);
 
-	}
-
-	process() {
-
+			this.taskHandler.process(task)
+				.then(() => {
+					this.notifyProcessed(task);
+					resolve();
+				})
+				.catch(reject);
+		});
 	}
 
 	notifyProcessing(task) {
-		this.events.emit(`${this.options.type}.task.processing`, { task });
+		this.events.emit(`${this.options.type}.task.processing`, { task, status: 'processing' });
 	}
 
 	notifyProcessed(task) {
-		this.events.emit(`${this.options.type}.task.processed`, { task });
+		this.events.emit(`${this.options.type}.task.processed`, { task, status: 'processed' });
 	}
 }
 

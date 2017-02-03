@@ -20,13 +20,18 @@ class TaskController {
 	}
 
 	onDocumentCreated({document}) {
+		this.createTask({type: 'document', srcId: document.id});
+	}
+
+	createTask({type, srcId}) {
 		const newTask = new Task({
-			document
+			srcId,
+			type
 		});
 
 		newTask.save()
 			.then((saved) => {
-				this.events.emit('document.task.created', {task: saved.id});
+				this.events.emit(`${type}.task.created`, {task: saved.id});
 			})
 			.catch((err) => {
 				this.events.emit('error', err);
