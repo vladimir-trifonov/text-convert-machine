@@ -1,13 +1,14 @@
+/* global Promise */ 
 const mongoose = require('mongoose');
+mongoose.Promise = Promise;
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
-	type: { type: String, required: true, trim: true },
-	priority: { type: Number, required: true, trim: true },
 	document: {
 		type: Schema.Types.ObjectId,
 		ref: 'Document'
-	}
+	},
+	status: { type: String, required: true, enum: ['processed', 'processing', 'inQueue'], default: 'inQueue' }
 }, { timestamps: true });
 
 taskSchema.statics.getOrderedTasks = function () {

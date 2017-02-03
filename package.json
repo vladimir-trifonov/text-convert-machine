@@ -21,6 +21,7 @@
     "body-parser": "1.16.0",
     "debug": "2.6.0",
     "express": "4.14.1",
+    "express-joi": "0.3.1",
     "helmet": "3.4.0",
     "http-status": "1.0.1",
     "mongoose": "4.8.1",

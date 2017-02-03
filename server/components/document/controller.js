@@ -1,12 +1,21 @@
 const status = require('http-status');
 const Document = require('./model');
 
-exports.createDocument = (req, res, next) => {
-	const newDoc = new Document(req.body);
+class DocumentsController {
+	constructor({events}) {
+		this.events = events;
+	}
 
-	newDoc.save()
-		.then((data) => {
-			res.sendStatus(status.CREATED).send(data);
-		})
-		.catch(next);
-};
+	createDocument(req, res, next) {
+		const newDoc = new Document(req.body);
+
+		newDoc.save()
+			.then((saved) => {
+				this.events.emit('document.created', { document: saved.id });
+				res.status(status.CREATED).send(saved);
+			})
+			.catch(next);
+	}
+}
+
+exports.create = (params) => new DocumentsController(params);

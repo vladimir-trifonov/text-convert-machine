@@ -1,4 +1,6 @@
+/* global Promise */ 
 const mongoose = require('mongoose');
+mongoose.Promise = Promise;
 const Schema = mongoose.Schema;
 
 const documentSchema = new Schema({

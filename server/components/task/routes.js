@@ -1,10 +1,7 @@
 const express = require('express');
-const controller = require('./controller');
 
-module.exports = () => {
+module.exports = (controller) => {
 	const router = express.Router();
-
-	router.get('/tasks', controller.getTasks);
-
+	router.get('/tasks', controller.getTasks.bind(controller));
 	return router;
 };

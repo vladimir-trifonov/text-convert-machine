@@ -10,32 +10,33 @@ const error = debug('app:error');
 const bodyParser = require('body-parser');
 const components = require('./components');
 
-const start = (options) => {
+const start = ({port, ssl, publicPath, events}) => {
 	return new Promise((resolve, reject) => {
-		if (!options.port) {
+		if (!port) {
 			reject(new Error('The server must be started with an available port'));
 		}
 
 		const app = express();
-
+		app.use(morgan('dev'));
+		app.use(helmet());
 		// parse application/x-www-form-urlencoded 
 		app.use(bodyParser.urlencoded({ extended: false }));
-
 		// parse application/json 
 		app.use(bodyParser.json());
 
-		app.use(morgan('dev'));
-		app.use(helmet());
-
-		components({ app });
+		components({ app, events });
 
 		app.use((err, req, res, next) => {
 			error('Something went wrong!, err:' + err);
-			res.status(status.INTERNAL_SERVER_ERROR).send('Something went wrong!');
+			res.status(status.INTERNAL_SERVER_ERROR).send({message: 'Something went wrong!'});
 		});
 
-		const server = spdy.createServer(options.ssl, app)
-			.listen(options.port, () => resolve(server));
+		events.on('error', (err) => {
+			error('Something went wrong!, err:' + err);
+		});
+
+		const server = spdy.createServer(ssl, app)
+			.listen(port, () => resolve(server));
 	});
 };
 
