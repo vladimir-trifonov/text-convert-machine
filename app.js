@@ -1,20 +1,25 @@
 'use strict'
 
-const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const config = require('./server/config/env')[process.env.NODE_ENV || 'development'];
-const app = express();
+const config = require('./server/config/')[process.env.NODE_ENV || 'development'];
 
-app.use(morgan('dev'));
-app.use(helmet());
-app.use((err, req, res, next) => {
-	reject(new Error('Something went wrong!, err:' + err));
-	res.status(500).send('Something went wrong!');
+const {EventEmitter} = require('events');
+const server = require('./server');
+const path = require('path');
+
+const mediator = new EventEmitter();
+
+process.on('uncaughtException', (err) => {
+	console.error('Unhandled Exception', err)
 });
 
-if (!config.PORT) {
-	new Error('Missing config: PORT');
-}
+process.on('uncaughtRejection', (err, promise) => {
+	console.error('Unhandled Rejection', err)
+});
 
-const server = app.listen(config.PORT, () => console.log(`Server listening on port: ${config.PORT}`));
+server.start({
+	port: config.port,
+	ssl: config.ssl,
+	public: path.resolve(__dirname,'./front/src')
+}).then(() => console.log(`Server listening on port: ${config.port}`));
+
+mediator.emit('boot.ready');
