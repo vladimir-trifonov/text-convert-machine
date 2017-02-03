@@ -12,14 +12,14 @@ const start = (options) => {
 		const app = express();
 		app.use(morgan('dev'));
 		app.use(helmet());
-		app.use((err, req, res, next) => {
+		app.use((err, req, res) => {
 			reject(new Error('Something went wrong!, err:' + err));
 			res.status(500).send('Something went wrong!');
 		});
 
 		const server = spdy.createServer(options.ssl, app)
 			.listen(options.port, () => resolve(server));
-	})
-}
+	});
+};
 
 module.exports = Object.assign({}, { start });
