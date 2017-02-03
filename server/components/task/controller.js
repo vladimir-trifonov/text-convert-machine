@@ -26,7 +26,7 @@ class TaskController {
 
 		newTask.save()
 			.then((saved) => {
-				this.events.emit('task.created', {task: saved.id});
+				this.events.emit('document.task.created', {task: saved.id});
 			})
 			.catch((err) => {
 				this.events.emit('error', err);

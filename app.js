@@ -6,10 +6,11 @@ const mongoose = require('mongoose');
 const debug = require('debug');
 const error = debug('app:error');
 const events = new EventEmitter();
-const documentsQueue = require('./server/utils/documents-queue');
+const tasksQueue = require('./server/utils/tasks-queue');
 
 process.on('uncaughtException', (err) => {
 	error('Unhandled Exception', err);
+	throw err;
 });
 
 process.on('uncaughtRejection', (err) => {
@@ -17,7 +18,7 @@ process.on('uncaughtRejection', (err) => {
 });
 
 mongoose.connect(config.mongo.conn);
-documentsQueue.create({ events, options: config.tasks });
+tasksQueue.create({ events, options: config.tasks });
 
 server.start({
 	port: config.port,
