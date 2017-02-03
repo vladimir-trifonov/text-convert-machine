@@ -27,12 +27,8 @@ const start = ({port, ssl, publicPath, events}) => {
 		components({ app, events });
 
 		app.use((err, req, res, next) => {
-			error('Something went wrong!, err:' + err);
+			error('Something went wrong!', err);
 			res.status(status.INTERNAL_SERVER_ERROR).send({message: 'Something went wrong!'});
-		});
-
-		events.on('error', (err) => {
-			error('Something went wrong!, err:' + err);
 		});
 
 		const server = spdy.createServer(ssl, app)

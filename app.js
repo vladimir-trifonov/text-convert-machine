@@ -17,14 +17,22 @@ process.on('uncaughtRejection', (err) => {
 	error('Unhandled Rejection', err);
 });
 
+events.on('error', (err) => {
+	error('Something went wrong!', err);
+});
+
 mongoose.connect(config.mongo.conn);
-tasksQueue.create({ events, options: config.tasks });
+tasksQueue.create({ events, options: config.tasks.document });
 
 server.start({
 	port: config.port,
 	ssl: config.ssl,
 	publicPath: path.resolve(__dirname, './front/src'),
 	events
-}).then(() => console.log(`Server listening on port: ${config.port}`));
+}).then(() => {
+	events.emit('server.ready');
+	console.log(`Server listening on port: ${config.port}`);
+}).catch((err) => {
+	error('Server Error', err);
+});
 
-events.emit('server.ready');
