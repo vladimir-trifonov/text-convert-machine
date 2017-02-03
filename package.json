@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vladimir-trifonov/textConvertMachine.git"
+    "url": "git+https://github.com/vladimir-trifonov/text-convert-machine.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vladimir-trifonov/textConvertMachine/issues"
+    "url": "https://github.com/vladimir-trifonov/text-convert-machine/issues"
   },
-  "homepage": "https://github.com/vladimir-trifonov/textConvertMachine#readme",
+  "homepage": "https://github.com/vladimir-trifonov/text-convert-machine#readme",
   "dependencies": {
     "express": "4.14.1"
   },
