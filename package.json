@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --use_strict app.js"
+    "dev": "DEBUG=* nodemon --use_strict app.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/vladimir-trifonov/text-convert-machine#readme",
   "dependencies": {
+    "body-parser": "1.16.0",
+    "debug": "2.6.0",
     "express": "4.14.1",
     "helmet": "3.4.0",
+    "http-status": "1.0.1",
     "mongoose": "4.8.1",
     "morgan": "1.7.0",
     "spdy": "3.4.4"
