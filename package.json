@@ -1,0 +1,25 @@
+{
+  "name": "text-convert-machine",
+  "version": "1.0.0",
+  "description": "Text Convert Machine",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladimir-trifonov/textConvertMachine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vladimir-trifonov/textConvertMachine/issues"
+  },
+  "homepage": "https://github.com/vladimir-trifonov/textConvertMachine#readme",
+  "dependencies": {
+    "express": "4.14.1"
+  },
+  "devDependencies": {
+    "angular-cli": "1.0.0-beta.28.3"
+  }
+}
