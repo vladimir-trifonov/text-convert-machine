@@ -33,7 +33,7 @@ class TasksQueue {
 	}
 
 	proceedTask() {
-		this.taskHandler.getNext()
+		this.taskHandler.getNext(this.options)
 			.then(this.process.bind(this))
 			.then(this.proceedTask.bind(this))
 			.catch(() => {
@@ -41,25 +41,25 @@ class TasksQueue {
 			});
 	}
 
-	process({task}) {
+	process(task) {
 		return new Promise((resolve, reject) => {
-			this.notifyProcessing(task);
-
-			this.taskHandler.process(task)
+			task.setStatus('processing')
+				.then(this.notify.bind(this))
+				.then(this.taskHandler.process)
 				.then(() => {
-					this.notifyProcessed(task);
+					return task.setStatus('processed');
+				})
+				.then(() => {
+					this.notify(task);
 					resolve();
 				})
 				.catch(reject);
 		});
 	}
 
-	notifyProcessing(task) {
-		this.events.emit(`${this.options.type}.task.processing`, { task, status: 'processing' });
-	}
-
-	notifyProcessed(task) {
-		this.events.emit(`${this.options.type}.task.processed`, { task, status: 'processed' });
+	notify(task) {
+		this.events.emit(`${this.options.type}.task.changed`, { task });
+		return task;
 	}
 }
 

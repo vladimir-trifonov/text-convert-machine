@@ -8,7 +8,21 @@ class TaskController {
 	}
 
 	initEventHandlers() {
-		this.events.on('document.create-convert-task', this.onDocumentCreateConvertTask.bind(this));
+		this.events.on('document.convert.task.new', (source) => {
+			this.createTask({ type: 'document.convert', source });
+		});
+	}
+
+	createTask(task) {
+		const newTask = new Task(task);
+
+		newTask.save()
+			.then((saved) => {
+				this.events.emit(`${saved.type}.task.created`, saved);
+			})
+			.catch((err) => {
+				this.events.emit('error', err);
+			});
 	}
 
 	getTasks(req, res, next) {
@@ -17,22 +31,6 @@ class TaskController {
 				res.status(status.OK).send(data);
 			})
 			.catch(next);
-	}
-
-	onDocumentCreateConvertTask(source) {
-		this.createTask({ type: 'document.convert', source });
-	}
-
-	createTask(task) {
-		const newTask = new Task(task);
-
-		newTask.save()
-			.then((saved) => {
-				this.events.emit(`${saved.type}.task.created`);
-			})
-			.catch((err) => {
-				this.events.emit('error', err);
-			});
 	}
 }
 

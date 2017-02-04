@@ -13,8 +13,8 @@ class DocumentsController {
 		newDoc.save()
 			.then((saved) => {
 				// Create convert task
-				const message = { id: saved.id, name: saved.name, createdAt: saved.createdAt, convertTo };
-				this.events.emit('document.create-convert-task', message);
+				const message = { id: saved.id, name: saved.name, convertTo };
+				this.events.emit('document.convert.task.new', message);
 
 				res.sendStatus(status.CREATED);
 			})

@@ -1,1 +1,1 @@
-exports['document.convert'] = require('./document.convert.task');
+exports['document.convert'] = require('./document.convert');
