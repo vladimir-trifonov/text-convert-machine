@@ -20,8 +20,7 @@ class TaskController {
 			.catch(next);
 	}
 
-	onDocumentCreateConvertTask({document, convertTo}) {
-		let source = Object.assign({}, document, { convertTo });
+	onDocumentCreateConvertTask({source, convertTo}) {
 		this.createTask({ type: 'document.convert', source, priority: this.options.document.convert.priority[convertTo] });
 	}
 
