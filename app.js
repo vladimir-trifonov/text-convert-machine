@@ -28,8 +28,7 @@ server.start({
 	port: config.port,
 	ssl: config.ssl,
 	publicPath: path.resolve(__dirname, './front/src'),
-	events,
-	componentOptions: { task: config.tasks }
+	events
 }).then(() => {
 	events.emit('server.ready');
 	console.log(`Server listening on port: ${config.port}`);

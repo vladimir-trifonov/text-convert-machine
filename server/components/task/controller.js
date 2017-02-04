@@ -2,9 +2,8 @@ const status = require('http-status');
 const Task = require('./model');
 
 class TaskController {
-	constructor({events, options = {}}) {
+	constructor(events) {
 		this.events = events;
-		this.options = options;
 		this.initEventHandlers();
 	}
 
@@ -20,8 +19,8 @@ class TaskController {
 			.catch(next);
 	}
 
-	onDocumentCreateConvertTask({source, convertTo}) {
-		this.createTask({ type: 'document.convert', source, priority: this.options.document.convert.priority[convertTo] });
+	onDocumentCreateConvertTask(source) {
+		this.createTask({ type: 'document.convert', source });
 	}
 
 	createTask(task) {

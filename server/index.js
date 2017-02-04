@@ -10,7 +10,7 @@ const error = debug('app:error');
 const bodyParser = require('body-parser');
 const components = require('./components');
 
-const start = ({port, ssl, publicPath, events, componentOptions }) => {
+const start = ({port, ssl, publicPath, events }) => {
 	return new Promise((resolve, reject) => {
 		if (!port) {
 			reject(new Error('The server must be started with an available port'));
@@ -24,7 +24,7 @@ const start = ({port, ssl, publicPath, events, componentOptions }) => {
 		// parse application/json 
 		app.use(bodyParser.json());
 
-		components({ app, events, componentOptions });
+		components({ app, events });
 
 		app.use((err, req, res, next) => {
 			error('Something went wrong!', err);

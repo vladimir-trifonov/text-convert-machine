@@ -6,7 +6,6 @@ const Schema = mongoose.Schema;
 const taskSchema = new Schema({
 	source: { type: Object, required: true },
 	type: { type: String, required: true, enum: ['document.convert'] },
-	priority: { type: Number, required: true, default: 0 },
 	status: { type: String, required: true, enum: ['processed', 'processing', 'inQueue'], default: 'inQueue' }
 }, { timestamps: true });
 
