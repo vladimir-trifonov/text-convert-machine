@@ -22,13 +22,14 @@ events.on('error', (err) => {
 });
 
 mongoose.connect(config.mongo.conn);
-tasksQueue.create({ events, options: config.tasks.document });
+tasksQueue.create({ events, options: config.tasks.document.convert });
 
 server.start({
 	port: config.port,
 	ssl: config.ssl,
 	publicPath: path.resolve(__dirname, './front/src'),
-	events
+	events,
+	componentOptions: { task: config.tasks }
 }).then(() => {
 	events.emit('server.ready');
 	console.log(`Server listening on port: ${config.port}`);

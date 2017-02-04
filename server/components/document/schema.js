@@ -1,11 +1,10 @@
 const expressJoi = require('express-joi');
 const Joi = expressJoi.Joi;
-const Document = require('./model');
 
 module.exports = {
-	createDocumentSchema: {
+	createAndConvertDocument: {
 		name: Joi.types.String().required(),
 		text: Joi.types.String().required(),
-		type: Joi.types.String().required().valid(Document.schema.path('type').enumValues)
+		convertto: Joi.types.String().required().valid(['html', 'pdf'])
 	}
 };

@@ -6,12 +6,16 @@ class DocumentsController {
 		this.events = events;
 	}
 
-	createDocument(req, res, next) {
-		const newDoc = new Document(req.body);
+	createAndConvertDocument(req, res, next) {
+		const {name, text, convertto} = req.body;
+		const newDoc = new Document({ name, text });
 
 		newDoc.save()
 			.then((saved) => {
-				this.events.emit('document.created', { document: saved });
+				// Create convert task
+				let message = { document: { id: saved.id, name: saved.name, createdAt: saved.createdAt }, convertTo: convertto };
+				this.events.emit('document.create-convert-task', message);
+
 				res.status(status.CREATED).send(saved);
 			})
 			.catch(next);

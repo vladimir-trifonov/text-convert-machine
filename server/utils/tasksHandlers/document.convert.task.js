@@ -9,6 +9,7 @@ module.exports = {
 				return reject();
 			}
 			setTimeout(() => {
+				console.log('1');
 				resolve({task: '123'});
 			}, 1000);
 		});
@@ -16,6 +17,7 @@ module.exports = {
 	process: (task) => {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
+				console.log('2');
 				resolve();
 			}, 1000);
 		});

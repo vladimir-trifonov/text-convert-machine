@@ -4,6 +4,12 @@ const schema = require('./schema');
 
 module.exports = (controller) => {
 	const router = express.Router();
-	router.post('/documents', expressJoi.joiValidate(schema.createDocumentSchema), controller.createDocument.bind(controller));
+
+	router.post(
+		'/documents/convert', 
+		expressJoi.joiValidate(schema.createAndConvertDocument), 
+		controller.createAndConvertDocument.bind(controller)
+	);
+	
 	return router;
 };
