@@ -12,14 +12,13 @@ module.exports = {
 						return reject();
 					}
 
-					getPreemptsTasks({ type: options.type, limit: options.preempts, fromDate: tasks[0].createdAt })
-						.then((preemptsTasks) => {
-							resolve(getNextTaskByPriority(options.priority, tasks[0], preemptsTasks));
-						})
-						.catch((err) => {
-							throw err;
-						});
+					return tasks[0];
 				})
+				.then((nextTask) => {
+					return getPreemptsTasks({ type: options.type, limit: options.preempts, fromDate: nextTask.createdAt })
+						.then(getNextTaskByPriority({ priority: options.priority, preempts: options.preempts, nextTask }));
+				})
+				.then(resolve)
 				.catch((err) => {
 					error(err);
 					reject();
@@ -28,7 +27,7 @@ module.exports = {
 	},
 	process: (task) => {
 		return new Promise((resolve, reject) => {
-			setTimeout(()=> {
+			setTimeout(() => {
 				resolve();
 			}, 1000);
 		});
@@ -43,21 +42,27 @@ function getPreemptsTasks({type, limit, fromDate}) {
 	return TaskModel.getTasksByType({ type, limit, fromDate });
 }
 
-function getNextTaskByPriority(priority, nextTask, preemptsTasks) {
-	const nextTaskPriority = priority[nextTask.source.convertTo];
+function getNextTaskByPriority({preempts, priority, nextTask}) {
+	return (preemptsTasks) => {
+		if (preemptsTasks.length < preempts) {
+			return nextTask;
+		}
 
-	const preemptsTasksNotProcessed = preemptsTasks.filter((task) => {
-		return task.status !== 'processed';
-	});
+		const preemptsTasksNotProcessed = preemptsTasks.filter((task) => {
+			return task.status !== 'processed';
+		});
 
-	if (!preemptsTasks.length || !preemptsTasksNotProcessed.length) {
-		return nextTask;
-	}
+		if (!preemptsTasksNotProcessed.length) {
+			return nextTask;
+		}
 
-	const preemptsTasksPriority = preemptsTasks.reduce((sum, task) => {
-		sum += priority[task.source.convertTo];
-		return sum;
-	}, 0);
+		const nextTaskPriority = priority[nextTask.source.convertTo];
 
-	return preemptsTasksPriority > nextTaskPriority ? nextTask : preemptsTasksNotProcessed[0];
+		const preemptsTasksPriority = preemptsTasks.reduce((sum, task) => {
+			sum += priority[task.source.convertTo];
+			return sum;
+		}, 0);
+
+		return preemptsTasksPriority < nextTaskPriority ? preemptsTasksNotProcessed[0] : nextTask;
+	};
 }

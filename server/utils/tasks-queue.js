@@ -20,44 +20,44 @@ class TasksQueue {
 	}
 
 	initEventHandlers() {
-		this.events.on('server.ready', this.run.bind(this));
-		this.events.on(`${this.options.type}.task.created`, this.run.bind(this));
+		this.events.on('server.ready', this.start.bind(this));
+		this.events.on(`${this.options.type}.task.created`, this.start.bind(this));
 	}
 
-	run() {
+	start() {
 		if (this.state === STATE.BUSY) {
 			return;
 		}
 		this.state = STATE.BUSY;
-		this.proceedTask();
+		this.next();
 	}
 
-	proceedTask() {
+	next() {
 		this.taskHandler.getNext(this.options)
-			.then(this.process.bind(this))
-			.then(this.proceedTask.bind(this))
+			.then(this.processCurrent.bind(this))
+			.then(this.next.bind(this))
 			.catch(() => {
 				this.state = STATE.IDLE;
 			});
 	}
 
-	process(task) {
+	processCurrent(task) {
 		return new Promise((resolve, reject) => {
 			task.setStatus('processing')
-				.then(this.notify.bind(this))
+				.then(this.notifyOnChange.bind(this))
 				.then(this.taskHandler.process)
 				.then(() => {
 					return task.setStatus('processed');
 				})
 				.then(() => {
-					this.notify(task);
+					this.notifyOnChange(task);
 					resolve();
 				})
 				.catch(reject);
 		});
 	}
 
-	notify(task) {
+	notifyOnChange(task) {
 		this.events.emit(`${this.options.type}.task.changed`, { task });
 		return task;
 	}
