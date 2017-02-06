@@ -25,8 +25,12 @@ class TaskController {
 			});
 	}
 
-	getTasks(req, res, next) {
-		Task.getOrderedTasks()
+	getTasksByType(req, res, next) {
+		if(!req.query.type) {
+			return res.status(400).json({message: 'Missing query param: type'});
+		}
+
+		Task.getTasksByType({type: req.query.type})
 			.then((data) => {
 				res.status(status.OK).send(data);
 			})

@@ -9,10 +9,6 @@ const taskSchema = new Schema({
 	status: { type: String, required: true, enum: ['processed', 'processing', 'inQueue'], default: 'inQueue' }
 }, { timestamps: true });
 
-taskSchema.statics.getOrderedTasks = function () {
-	return this.find({}).sort({ createdAt: 1 }).exec();
-};
-
 taskSchema.statics.getTasksByType = function ({type, limit, statusIn, fromDate}) {
 	let findQuery = { type };
 

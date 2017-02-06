@@ -12,13 +12,10 @@ module.exports = {
 						return reject();
 					}
 
-					return tasks[0];
+					return getPreemptsTasks({ type: options.type, limit: options.preempts, fromDate: tasks[0].createdAt })
+						.then(getNextTaskByPriority({ priority: options.priority, preempts: options.preempts, nextTask: tasks[0] }))
+						.then(resolve);
 				})
-				.then((nextTask) => {
-					return getPreemptsTasks({ type: options.type, limit: options.preempts, fromDate: nextTask.createdAt })
-						.then(getNextTaskByPriority({ priority: options.priority, preempts: options.preempts, nextTask }));
-				})
-				.then(resolve)
 				.catch((err) => {
 					error(err);
 					reject();

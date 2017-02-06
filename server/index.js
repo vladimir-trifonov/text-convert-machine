@@ -9,6 +9,8 @@ const debug = require('debug');
 const error = debug('app:error');
 const bodyParser = require('body-parser');
 const components = require('./components');
+// TODO: remove
+var cors = require('cors');
 
 const start = ({port, ssl, publicPath, events }) => {
 	return new Promise((resolve, reject) => {
@@ -17,6 +19,8 @@ const start = ({port, ssl, publicPath, events }) => {
 		}
 
 		const app = express();
+		// TODO: remove
+		app.use(cors());
 		app.use(morgan('dev'));
 		app.use(helmet());
 		// parse application/x-www-form-urlencoded 
