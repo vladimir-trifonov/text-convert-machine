@@ -1,1 +1,26 @@
-<div>Conversions</div>
+<div id="extended-table">
+	<h1>Conversions</h1>
+	<h2>+ New Conversion</h2>
+
+	<div class="table-responsive-vertical shadow-z-1"></div>
+	<table id="table" class="table table-hover table-mc-light-blue">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Created At</th>
+				<th>Type</th>
+				<th>Status</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+				<tr *ngFor="let row of conversions$ | async">
+						<td data-title="Name">{{row.source.name}}</td>
+						<td data-title="Created At">  {{ row.createdAt | date:'d'}}/{{ row.createdAt | date:'MM'}}/{{ row.createdAt | date:'y'}}</td>
+						<td data-title="Type">{{row.source.convertTo}}</td>
+						<td data-title="Status">{{row.status}}</td>
+						<td data-title="">Download</td>
+				</tr>
+		</tbody>
+	</table>
+</div>

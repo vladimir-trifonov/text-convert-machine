@@ -8,6 +8,11 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './components';
 import { routing } from './app.routing';
 
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
+import { rootReducer } from './reducers';
+import { RootState, IAppState } from './store'
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,9 +23,23 @@ import { routing } from './app.routing';
     HttpModule,
     RouterModule,
     ComponentsModule,
+    NgReduxModule,
     routing
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>, private devTools: DevToolsExtension) {
+    let enhancers = [];
+    if (!environment.production) {
+      enhancers = [devTools.enhancer()];
+    }
+    
+    ngRedux.configureStore(
+      rootReducer,
+      RootState,
+      [],
+      enhancers);
+  }
+}
