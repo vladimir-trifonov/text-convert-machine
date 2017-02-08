@@ -1,1 +1,10 @@
-<div>Create Conversions</div>
+<form connect="createConversion">
+	<h1>New conversion</h1>
+	<label for="name">Name</label>
+	<input type="text" id="name">
+	<select>
+		<option [value]="html">Generate HTML</option>
+		<option [value]="pdf">Generate PDF</option>
+	</select>
+	<a>Request conversion</a>
+</form>

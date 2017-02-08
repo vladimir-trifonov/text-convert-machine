@@ -15,10 +15,18 @@ export class ConversionsService {
 			.map(this.extractData)
 			.catch(this.handleError);
 	}
+
+	createConversion(conversion) {
+		return this.http.post(this.conversionsUrl, conversion)
+			.map(this.extractData)
+			.catch(this.handleError);
+	}
+
 	private extractData(res: Response) {
 		let body = res.json();
 		return body || [];
 	}
+
 	private handleError(error: Response | any) {
 		let errMsg: string;
 		if (error instanceof Response) {
