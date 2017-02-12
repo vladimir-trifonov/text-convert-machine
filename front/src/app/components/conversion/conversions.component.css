@@ -3,10 +3,8 @@
   max-width: 960px;
 }
 #extended-table h1 {
-  font-size: 2.4rem;
   line-height: 3.2rem;
   letter-spacing: 0;
-  font-weight: 300;
   color: #212121;
   text-transform: inherit;
   margin-bottom: 1rem;
@@ -14,9 +12,9 @@
 }
 #extended-table h2 {
   font-size: 1.5rem;
-  line-height: 2.8rem;
+  line-height: 1.8rem;
+  padding-bottom: 0.5rem;
   letter-spacing: 0.01rem;
-  font-weight: 400;
   color: #212121;
   text-align: center;
 }
@@ -46,7 +44,7 @@
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
   text-align: left;
-  padding: 1.6rem;
+  padding: 1rem;
   vertical-align: top;
   border-top: 0;
   -webkit-transition: all 0.3s ease;
@@ -558,4 +556,32 @@
   .table-responsive-vertical .table-hover.table-mc-deep-orange > tbody > tr > td:hover {
     background-color: #ffccbc;
   }
+}
+
+.title { 
+  float: left;
+}
+.controls { 
+  float: right;
+}
+.btn {
+	display: inline-block;
+	outline: 0;
+	padding: 2px 8px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none!important;
+	cursor: pointer;
+	white-space: nowrap;
+	font-size: 17px;
+  border: 1px solid #cccccc;
+}
+.text-center {
+  text-align: center!important;
+}
+.dark {
+  color: #fff;
+  background-color: #000;
+  display: block;
+  padding: 2px 8px;
 }

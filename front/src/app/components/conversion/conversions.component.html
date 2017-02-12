@@ -1,6 +1,6 @@
 <div id="extended-table">
-	<h1>Conversions</h1>
-	<h2><a [routerLink]="['/conversions/create']">+ New Conversion</a></h2>
+	<div class="title"><h1>Conversions</h1></div>
+	<div class="controls"><h2><a [routerLink]="['/conversions/create']" class="btn">+ New Conversion</a></h2></div>
 
 	<div class="table-responsive-vertical shadow-z-1"></div>
 	<table id="table" class="table table-hover table-mc-light-blue">
@@ -16,10 +16,10 @@
 		<tbody>
 				<tr *ngFor="let row of conversions$ | async">
 						<td data-title="Name">{{row.source.name}}</td>
-						<td data-title="Created At">  {{ row.createdAt | date:'d'}}/{{ row.createdAt | date:'MM'}}/{{ row.createdAt | date:'y'}}</td>
-						<td data-title="Type">{{row.source.convertTo}}</td>
+						<td data-title="Created At">  {{ row.createdAt | date:'d'}}/{{ row.createdAt | date:'MM'}}/{{ row.createdAt | date:'y'}} {{row.createdAt | date:'HH'}}:{{row.createdAt | date:'mm'}}</td>
+						<td data-title="Type" class="text-center"><span class="dark">{{row.source.convertTo | uppercase}}</span></td>
 						<td data-title="Status">{{row.status}}</td>
-						<td data-title="">Download</td>
+						<td data-title="" class="text-center"><a class="btn">Download</a></td>
 				</tr>
 		</tbody>
 	</table>
