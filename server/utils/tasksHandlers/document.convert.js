@@ -22,12 +22,14 @@ module.exports = {
 				});
 		});
 	},
-	process: (task) => {
-		return new Promise((resolve, reject) => {
-			setTimeout(() => {
-				resolve();
-			}, 1000);
-		});
+	process: (options) => {
+		return (task) => {
+			return new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve();
+				}, options.delay[task.source.convertTo]);
+			});
+		};
 	}
 };
 

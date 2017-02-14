@@ -4,21 +4,20 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ConversionsService {
-	private conversionsUrl = 'https://localhost:3000/api/tasks?type=document.convert';  // URL to web API
 	constructor(private http: Http) { }
 
 	getConversions(): Observable<any[]> {
-		return this.http.get(this.conversionsUrl)
+		return this.http.get(`${environment.api}/api/tasks?type=document.convert`)
 			.map(this.extractData)
 			.catch(this.handleError);
 	}
 
 	createConversion(conversion) {
-		return this.http.post(this.conversionsUrl, conversion)
-			.map(this.extractData)
+		return this.http.post(`${environment.api}/api/documents/convert`, conversion)
 			.catch(this.handleError);
 	}
 
@@ -36,7 +35,8 @@ export class ConversionsService {
 		} else {
 			errMsg = error.message ? error.message : error.toString();
 		}
-		console.error(errMsg);
+		// TODO: Toastr error message
+		console.log(errMsg);
 		return Observable.throw(errMsg);
 	}
 }

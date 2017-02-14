@@ -14,7 +14,7 @@
 			</tr>
 		</thead>
 		<tbody>
-				<tr *ngFor="let row of conversions$ | async">
+				<tr *ngFor="let row of conversions$ | async" data-id={{row._id}}>
 						<td data-title="Name">{{row.source.name}}</td>
 						<td data-title="Created At">  {{ row.createdAt | date:'d'}}/{{ row.createdAt | date:'MM'}}/{{ row.createdAt | date:'y'}} {{row.createdAt | date:'HH'}}:{{row.createdAt | date:'mm'}}</td>
 						<td data-title="Type" class="text-center"><span class="dark">{{row.source.convertTo | uppercase}}</span></td>

@@ -14,7 +14,7 @@ export class CreateConversion {
   constructor(public fb: FormBuilder, private actions: CreateConversionActions) {
     this.createConversionForm = this.fb.group({
       name: ["", Validators.required],
-      type: ["", Validators.required]
+      convertTo: ["", Validators.required]
     });
   }
   

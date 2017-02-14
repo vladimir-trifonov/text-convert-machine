@@ -6,6 +6,10 @@ module.exports = {
 			priority: {
 				html: 1,
 				pdf: 3
+			},
+			delay: {
+				html: 5000,
+				pdf: 5000
 			}
 		}
 	}

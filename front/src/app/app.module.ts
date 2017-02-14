@@ -14,7 +14,7 @@ import { rootReducer } from './reducers';
 import { RootState, IAppState } from './store'
 import { environment } from '../environments/environment';
 
-import * as io from 'socket.io-client';
+import addSocketListeners from './socket-listeners';
 
 @NgModule({
   declarations: [
@@ -46,10 +46,6 @@ export class AppModule {
       [],
       enhancers);
     
-    // TODO: config
-    var socket = io('https://localhost:3000');
-    socket.on('event', function (data: any) {
-      console.log(data);
-    }.bind(this));
+    addSocketListeners(ngRedux.dispatch, ngRedux.getState);  
   }
 }

@@ -7,6 +7,7 @@ import { IAppState } from '../store';
 @Injectable()
 export class ConversionsActions {
   static GET_CONVERSIONS: string = 'GET_CONVERSIONS';
+  static UPDATE_CONVERSION: string = 'UPDATE_CONVERSION';
 
   constructor(private conversionsService: ConversionsService, private ngRedux: NgRedux<IAppState>) { }
 

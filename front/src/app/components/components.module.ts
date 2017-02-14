@@ -7,6 +7,7 @@ import { Conversions } from './conversion/conversions.component';
 import { CreateConversion } from './conversion/create-conversion.component';
 import { routing } from './components.routing';
 import { ConversionsActions } from '../actions/conversions.actions';
+import { CreateConversionActions } from '../actions/create-conversion.actions';
 import { ConversionsService } from './conversion/conversions.service';
 
 import { NgReduxModule } from '@angular-redux/store';
@@ -25,6 +26,10 @@ import { QuillModule } from 'ngx-quill';
     Conversions,
 		CreateConversion
   ],
-  providers: [ConversionsActions, ConversionsService]
+  providers: [
+    ConversionsActions, 
+    CreateConversionActions, 
+    ConversionsService
+  ]
 })
 export class ComponentsModule {}

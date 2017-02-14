@@ -4,7 +4,7 @@
 	<input formControlName="name" type="text" id="name">
 	<quill-editor [(ngModel)]="editor" [ngModelOptions]="{standalone: true}"></quill-editor>
 	<div class="right">
-		<select formControlName="type">
+		<select formControlName="convertTo">
 			<option value="html">Generate HTML</option>
 			<option value="pdf">Generate PDF</option>
 		</select>

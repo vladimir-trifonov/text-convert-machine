@@ -45,7 +45,7 @@ class TasksQueue {
 		return new Promise((resolve, reject) => {
 			task.setStatus('processing')
 				.then(this.notifyOnChange.bind(this))
-				.then(this.taskHandler.process)
+				.then(this.taskHandler.process(this.options))
 				.then(() => {
 					return task.setStatus('processed');
 				})
