@@ -14,6 +14,8 @@ import { rootReducer } from './reducers';
 import { RootState, IAppState } from './store'
 import { environment } from '../environments/environment';
 
+import * as io from 'socket.io-client';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -37,11 +39,17 @@ export class AppModule {
     if (!environment.production) {
       enhancers = [devTools.enhancer()];
     }
-    
+
     ngRedux.configureStore(
       rootReducer,
       RootState,
       [],
       enhancers);
+    
+    // TODO: config
+    var socket = io('https://localhost:3000');
+    socket.on('event', function (data: any) {
+      console.log(data);
+    }.bind(this));
   }
 }

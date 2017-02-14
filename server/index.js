@@ -35,8 +35,15 @@ const start = ({port, ssl, publicPath, events }) => {
 			res.status(status.INTERNAL_SERVER_ERROR).send({message: 'Something went wrong!'});
 		});
 
-		const server = spdy.createServer(ssl, app)
-			.listen(port, () => resolve(server));
+		const server = spdy.createServer(ssl, app);
+			
+		const io = require('socket.io')(server);
+		io.on('connection', function(socket) {
+			console.log('new connection');
+			socket.emit('message', 'This is a message from the dark side.');
+		});
+
+		server.listen(port, () => resolve(server));
 	});
 };
 

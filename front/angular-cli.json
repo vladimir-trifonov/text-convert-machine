@@ -22,7 +22,9 @@
         "../node_modules/quill/dist/quill.core.css",
         "../node_modules/quill/dist/quill.snow.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/socket.io-client/dist/socket.io.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

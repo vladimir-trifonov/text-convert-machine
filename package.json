@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "DEBUG=* nodemon --use_strict app.js"
+    "dev": "DEBUG=app nodemon --use_strict app.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "http-status": "1.0.1",
     "mongoose": "4.8.1",
     "morgan": "1.7.0",
+    "socket.io": "1.7.2",
     "spdy": "3.4.4"
   },
   "devDependencies": {},
