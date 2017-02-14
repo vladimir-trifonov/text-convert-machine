@@ -5,6 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const debug = require('debug');
 const error = debug('app:error');
+const log = debug('app:log');
 const events = new EventEmitter();
 const tasksQueue = require('./server/utils/tasks-queue');
 
@@ -31,7 +32,7 @@ server.start({
 	events
 }).then(() => {
 	events.emit('server.ready');
-	console.log(`Server listening on port: ${config.port}`);
+	log(`Server listening on port: ${config.port}`);
 }).catch((err) => {
 	error('Server Error', err);
 });
