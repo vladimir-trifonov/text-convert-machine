@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { Conversions } from './conversion/conversions.component';
 import { CreateConversion } from './conversion/create-conversion.component';
@@ -9,15 +10,16 @@ import { ConversionsActions } from '../actions/conversions.actions';
 import { ConversionsService } from './conversion/conversions.service';
 
 import { NgReduxModule } from '@angular-redux/store';
-import { NgReduxFormModule } from '@angular-redux/form';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     routing,
-    NgReduxFormModule,
-    NgReduxModule
+    NgReduxModule,
+    QuillModule
   ],
 	declarations: [
     Conversions,
@@ -25,5 +27,4 @@ import { NgReduxFormModule } from '@angular-redux/form';
   ],
   providers: [ConversionsActions, ConversionsService]
 })
-export class ComponentsModule {
-}
+export class ComponentsModule {}

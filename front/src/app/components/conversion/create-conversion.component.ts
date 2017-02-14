@@ -1,8 +1,26 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CreateConversionActions } from '../../actions/create-conversion.actions';
 
 @Component({
   selector: 'create-conversion',
   templateUrl: './create-conversion.component.html',
   styleUrls: ['./create-conversion.component.css']
 })
-export class CreateConversion {}
+export class CreateConversion {
+  createConversionForm: FormGroup;
+  editor: String;
+
+  constructor(public fb: FormBuilder, private actions: CreateConversionActions) {
+    this.createConversionForm = this.fb.group({
+      name: ["", Validators.required],
+      type: ["", Validators.required]
+    });
+  }
+  
+  createConversion() {
+    this.actions.createConversion(Object.assign({}, this.createConversionForm.value, {
+      text: this.editor
+    }));
+  }
+}

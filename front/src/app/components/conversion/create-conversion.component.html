@@ -1,11 +1,12 @@
-<form connect="createConversion">
+<form [formGroup]="createConversionForm" (ngSubmit)="createConversion($event)">
 	<h1>New conversion</h1>
 	<label for="name">Name</label>
-	<input type="text" id="name">
+	<input formControlName="name" type="text" id="name">
+	<quill-editor [(ngModel)]="editor" [ngModelOptions]="{standalone: true}"></quill-editor>
 	<div class="right">
-		<select>
-			<option [value]="html">Generate HTML</option>
-			<option [value]="pdf">Generate PDF</option>
+		<select formControlName="type">
+			<option value="html">Generate HTML</option>
+			<option value="pdf">Generate PDF</option>
 		</select>
-	<a class="btn">Request conversion</a></div>
+	<button type="submit" class="btn">Request conversion</button></div>
 </form>

@@ -31,13 +31,12 @@ input[type=submit]:hover {
 .btn {
 	display: inline-block;
 	outline: 0;
-	padding: 0px 13px;
+	padding: 3px 14px;
 	vertical-align: middle;
 	overflow: hidden;
 	text-decoration: none!important;
 	cursor: pointer;
 	white-space: nowrap;
-	font-size: 12px;
-	border: 1px solid #ccc;
+	font-size: 14px;
 	font-weight: 700;
 }
