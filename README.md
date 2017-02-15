@@ -21,6 +21,6 @@ Given this, the requests for HTML conversions have more priority than PDF conver
 
 ## How to run:
 
-> npm install
-> mongod
+> npm install  
+> mongod  
 > npm start
