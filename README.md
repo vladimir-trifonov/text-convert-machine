@@ -4,6 +4,11 @@ Implements a small text conversion queueing service (server and a very simple we
 
 The interface is very simple and comprises only of two screens: Conversions list and New conversion. 
 
+## Prerequisites
+
+> node v. 7.5.0
+> Running mongoDB
+
 ## Implementation:
 
 The server is built in Node.js and MongoDB.
@@ -19,10 +24,8 @@ PDF requests: 100 seconds of additional timeout.
 
 Given this, the requests for HTML conversions have more priority than PDF conversions, meaning that if there is one PDF request followed by a few HTML requests on the queue, the system should make an effort to process the HTML ones first as they are quicker. (The priority policy, the number of HTML requests it processes/preempts over PDF, etc, can be defined.)
 
-## How to run:
+## How to run(type in bash):
 
-> npm install  
-> mongod  
-> npm start
+`./start.sh`
 
-Open the [App](https://localhost:4200) in the browser tab.
+Open the [App](http://localhost:4200) in a browser tab.
