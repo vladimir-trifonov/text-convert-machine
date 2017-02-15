@@ -21,8 +21,8 @@ Given this, the requests for HTML conversions have more priority than PDF conver
 
 ## How to run:
 
-> > npm install  
-> > mongod  
-> > npm start
+> npm install  
+> mongod  
+> npm start
 
-Open [Link](https://localhost:4200) in the browser
+Open the [App](https://localhost:4200) in the browser tab.
