@@ -6,7 +6,7 @@ The interface is very simple and comprises only of two screens: Conversions list
 
 ## Prerequisites
 
-> node v. 7.5.0
+> node v. 7.5.0  
 > Running mongoDB
 
 ## Implementation:
@@ -24,7 +24,7 @@ PDF requests: 100 seconds of additional timeout.
 
 Given this, the requests for HTML conversions have more priority than PDF conversions, meaning that if there is one PDF request followed by a few HTML requests on the queue, the system should make an effort to process the HTML ones first as they are quicker. (The priority policy, the number of HTML requests it processes/preempts over PDF, etc, can be defined.)
 
-## How to run(type in bash):
+## How to run:
 
 `./start.sh`
 
