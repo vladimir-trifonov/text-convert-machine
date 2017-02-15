@@ -6,8 +6,8 @@ The interface is very simple and comprises only of two screens: Conversions list
 
 ## Implementation:
 
-The server is built in Node.js and MongoDB;
-The web interface is be implemented using AngularJS 2;
+The server is built in Node.js and MongoDB;  
+The web interface is be implemented using AngularJS 2;  
 For the rich text editor is used Quill;
 
 The server implements queuing system that accepts content conversion requests. It receives the request to convert the content from the client/web interface, puts that request on a queue and replies back to the client with information about the queued request. After the request is processed, an HTML/PDF file is placed in a publicly folder being served, and informs the client/web interface of it in some way.
