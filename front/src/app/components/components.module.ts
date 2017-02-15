@@ -13,6 +13,8 @@ import { ConversionsService } from './conversion/conversions.service';
 import { NgReduxModule } from '@angular-redux/store';
 import { QuillModule } from 'ngx-quill';
 
+import { CapitalizePipe } from "../pipes/capitalize.pipe";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { QuillModule } from 'ngx-quill';
   ],
 	declarations: [
     Conversions,
-		CreateConversion
+		CreateConversion,
+    CapitalizePipe
   ],
   providers: [
     ConversionsActions, 

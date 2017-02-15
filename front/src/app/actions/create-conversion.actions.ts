@@ -14,10 +14,7 @@ export class CreateConversionActions {
   createConversion(conversion): void {
     this.conversionsService.createConversion(conversion)
       .subscribe(
-      conversion => {
-        this.ngRedux.dispatch({ type: CreateConversionActions.CREATE_CONVERSION, conversion });
-        this.router.navigate(['/conversions']);
-      },
+      conversion => this.router.navigate(['/conversions']),
       error => console.log(error)
     );
   }

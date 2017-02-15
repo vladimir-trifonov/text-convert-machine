@@ -1,1 +1,1 @@
-exports['document.convert'] = require('./document.convert');
+exports['document.convert'] = require('./document.convert')

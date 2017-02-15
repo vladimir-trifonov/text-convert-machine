@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require('express')
 
 module.exports = (controller) => {
-	const router = express.Router();
+  const router = express.Router()
 
-	router.get('/tasks', controller.getTasksByType.bind(controller));
-	
-	return router;
-};
+  router.get('/tasks', controller.getByType.bind(controller))
+
+  return router
+}

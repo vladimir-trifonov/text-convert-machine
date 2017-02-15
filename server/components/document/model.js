@@ -1,14 +1,23 @@
 /* global Promise */
-const mongoose = require('mongoose');
-mongoose.Promise = Promise;
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+mongoose.Promise = Promise
+const Schema = mongoose.Schema
 
 const documentSchema = new Schema({
-	name: { type: String, required: true },
-	text: { type: String, required: true },
-	conversions: { type: Array, required: false }
-}, { timestamps: true });
+  name: { type: String, required: true },
+  text: { type: String, required: true },
+  conversions: { type: Object, required: false }
+}, { timestamps: true })
 
-const Document = mongoose.model('Document', documentSchema);
+documentSchema.methods.addConversion = function (conversion) {
+  if (!this.conversions) {
+    this.conversions = []
+  }
+  this.conversions.push(conversion)
 
-module.exports = Document;
+  return this.save()
+}
+
+const Document = mongoose.model('Document', documentSchema)
+
+module.exports = Document

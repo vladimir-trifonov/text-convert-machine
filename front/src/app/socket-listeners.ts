@@ -1,7 +1,7 @@
 import { environment } from '../environments/environment';
 import * as io from 'socket.io-client';
 
-export const socket = io(environment.api);
+export const socket = io(`${environment.socket}`, {secure: true});
 
 export default function (dispatch, getState) {
   socket.on('document.convert.task.changed', data => {

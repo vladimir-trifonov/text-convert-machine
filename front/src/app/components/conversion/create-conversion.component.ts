@@ -19,8 +19,10 @@ export class CreateConversion {
   }
   
   createConversion() {
-    this.actions.createConversion(Object.assign({}, this.createConversionForm.value, {
-      text: this.editor
+    this.actions.createConversion(Object.assign({}, {
+			name: this.createConversionForm.value.name,
+      text: this.editor,
+			convertTo: this.createConversionForm.value.convertTo || 'html'
     }));
   }
 }

@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "@types/socket.io-client": "1.4.29",
+    "bootstrap": "3.3.7",
     "core-js": "^2.4.1",
     "ng2-quill": "0.0.6",
     "ngx-quill": "0.3.4",

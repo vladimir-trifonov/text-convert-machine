@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ui": ". ./front/ng-serve.sh",
+    "ui": ". ./serve-front.sh",
     "api": "DEBUG=app:log,app:error nodemon --use_strict app.js",
     "start": "concurrently --kill-others \"npm run api\" \"npm run ui\""
   },
@@ -25,13 +25,19 @@
     "express": "4.14.1",
     "express-joi": "0.3.1",
     "helmet": "3.4.0",
+    "html-to-pdf": "0.1.11",
     "http-status": "1.0.1",
     "mongoose": "4.8.1",
     "morgan": "1.7.0",
     "socket.io": "1.7.2",
     "spdy": "3.4.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1"
+  },
   "engines": {
     "node": ">= 7.2.1."
   },
