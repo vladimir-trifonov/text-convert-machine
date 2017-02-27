@@ -1,4 +1,4 @@
 
 #!/bin/bash
 cd front
-ng serve
+npm start
