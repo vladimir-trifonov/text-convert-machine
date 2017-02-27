@@ -100,10 +100,10 @@ function convertDocument (type, fn, text) {
 
     switch (type) {
       case 'html':
-        fs.writeFile(path.resolve(__dirname, '../../../storage', `${fn}.html`), text, convertHandler)
+        fs.writeFile(path.resolve(__dirname, '..', '..', '..', 'storage', `${fn}.html`), text, convertHandler)
         break
       case 'pdf':
-        htmlToPdf.convertHTMLString(text, path.resolve(__dirname, '../../../storage', `${fn}.pdf`), convertHandler)
+        htmlToPdf.convertHTMLString(text, path.resolve(__dirname, '..', '..', '..', 'storage', `${fn}.pdf`), convertHandler)
         break
     }
   })

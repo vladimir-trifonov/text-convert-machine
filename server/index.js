@@ -5,6 +5,7 @@ const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const spdy = require('spdy')
+const http = require('http')
 const debug = require('debug')
 const error = debug('app:error')
 const bodyParser = require('body-parser')
@@ -33,7 +34,8 @@ const start = ({ port, ssl, events }) => {
       res.status(status.INTERNAL_SERVER_ERROR).send({ message: 'Something went wrong!' })
     })
 
-    const server = spdy.createServer(ssl, app)
+    const server = http.createServer(app)
+    //const server = spdy.createServer(ssl, app)
 
     const io = require('socket.io')(server)
     notify({ io, events })

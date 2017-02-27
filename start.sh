@@ -1,6 +1,8 @@
 #!/bin/bash
-npm install  
+npm i nodemon angular-cli -g
+npm i 
+mkdir storage 
 cd front
-npm install
+npm i
 cd ..
 npm start

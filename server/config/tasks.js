@@ -8,7 +8,7 @@ module.exports = {
         pdf: 3
       },
       delay: {
-        html: 10000,
+        html: 1000,
         pdf: 100000
       }
     }
